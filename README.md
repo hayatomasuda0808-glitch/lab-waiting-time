@@ -21,7 +21,7 @@
     </div>
 
     <script>
-        const GAS_URL = "ここにステップ②で発行されたGASのウェブアプリURLを貼り付け";
+        const GAS_URL = "[ここにステップ②で発行されたGASのウェブアプリURLを貼り付け](https://script.google.com/macros/s/AKfycbzu20lq0pPKWAH6WfpWC0TetELGPG9YIzs7olrJEBTyKaKc89QEhEMbohl37TLeaApT/exec)";
 
         function fetchData() {
             fetch(GAS_URL)
