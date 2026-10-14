@@ -21,7 +21,7 @@
     </div>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbwIPOfwOgu3tdQ7tbu57e6QJQPO6KGMn6fDYpC9ZJIHnx62iQ_-jl_Dkq6onruMQq2y/exec";
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbzu20lq0pPKWAH6WfpWC0TetELGPG9YIzs7olrJEBTyKaKc89QEhEMbohl37TLeaApT/exec";
 
         function fetchData() {
             fetch(GAS_URL)
