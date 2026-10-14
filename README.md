@@ -1,1 +1,42 @@
 # lab-waiting-time
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究室展示 混雑状況</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 40px; background: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: inline-block; }
+        .time { font-size: 48px; font-weight: bold; color: #2563eb; margin: 20px 0; }
+    .status { font-size: 20px; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>研究室展示 リアルタイム状況</h2>
+        <div class="status" id="status">読み込み中...</div>
+        <div class="time" id="waitTime">-- 分待ち</div>
+        <p><small id="updateTime">最終更新: --:--:--</small></p>
+    </div>
+
+    <script>
+        const GAS_URL = "ここにステップ②で発行されたGASのウェブアプリURLを貼り付け";
+
+        function fetchData() {
+            fetch(GAS_URL)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('status').innerText = data.status;
+                    document.getElementById('waitTime').innerText = data.waitTime + " 分待ち";
+                    document.getElementById('updateTime').innerText = "最終更新: " + data.updatedAt;
+                })
+                .catch(error => console.error('エラー:', error));
+        }
+
+        // 初回取得と5秒ごとの定期更新
+        fetchData();
+        setInterval(fetchData, 5000);
+    </script>
+</body>
+</html>
