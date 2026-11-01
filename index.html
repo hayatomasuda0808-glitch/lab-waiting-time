@@ -18,14 +18,17 @@
             box-sizing: border-box;
         }
 
-        /* ヘッダーのスタイル */
+        /* 固定ヘッダーのスタイル */
         .header {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             background: #1e3a8a; /* 深みのあるブルー */
             color: white;
             padding: 16px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000; /* 最前面に表示 */
         }
         .header h1 {
             margin: 0;
@@ -34,11 +37,12 @@
             letter-spacing: 0.05em;
         }
 
-        /* メインコンテンツエリア（幅を統一するため共通コンテナで管理） */
+        /* メインコンテンツエリア（固定ヘッダーの高さ分上部余白を確保） */
         .container {
             width: 100%;
             max-width: 480px; /* すべてのコンテンツの基準幅 */
             padding: 0 16px 40px;
+            margin-top: 80px; /* ヘッダーとの重なりを防止 */
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
@@ -178,7 +182,7 @@
 </head>
 <body>
 
-    <!-- ヘッダー -->
+    <!-- 固定ヘッダー -->
     <header class="header">
         <h1>学習型知覚データ処理研究室</h1>
     </header>
