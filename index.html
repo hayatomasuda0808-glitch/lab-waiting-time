@@ -1,247 +1,6 @@
-<!-- <!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>走れ！だいごくん 混雑状況</title>
-    <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
-            text-align: center; 
-            background: #f4f4f9; 
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        /* 固定ヘッダーのスタイル */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: #1e3a8a; /* 深みのあるブルー */
-            color: white;
-            padding: 16px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            z-index: 1000; /* 最前面に表示 */
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        /* メインコンテンツエリア（固定ヘッダーの高さ分上部余白を確保） */
-        .container {
-            width: 100%;
-            max-width: 480px; /* すべてのコンテンツの基準幅 */
-            padding: 0 16px 40px;
-            margin-top: 80px; /* ヘッダーとの重なりを防止 */
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px; /* 要素間の余白を統一 */
-        }
-
-        /* 共通のカードスタイル */
-        .box-card {
-            background: white; 
-            padding: 24px; 
-            border-radius: 16px; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        /* 混雑状況カード */
-        .card h2 {
-            margin: 0 0 12px;
-            font-size: 22px;
-            color: #1f2937;
-            line-height: 1.3;
-        }
-        .status { 
-            font-size: 18px; 
-            color: #4b5563; 
-            font-weight: 500;
-        }
-        .time { 
-            font-size: 44px; 
-            font-weight: 700; 
-            color: #2563eb; 
-            margin: 14px 0; 
-        }
-        .update-time {
-            color: #6b7280;
-            font-size: 13px;
-            margin: 0;
-        }
-        
-        /* ランキングボタン（暖色系・幅統一） */
-        .ranking-button-container {
-            width: 100%;
-        }
-        .ranking-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); /* 鮮やかなオレンジグラデーション */
-            color: white;
-            font-size: 18px;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 14px;
-            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-        }
-        .ranking-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(234, 88, 12, 0.45);
-            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-        }
-        .ranking-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
-        }
-
-        /* フッターバナー（YouTubeサムネイル） */
-        .footer-banner h3 {
-            margin-top: 0;
-            font-size: 16px;
-            color: #1f2937;
-            margin-bottom: 14px;
-            text-align: left;
-        }
-        .video-link-card {
-            display: block;
-            text-decoration: none;
-            color: #333;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .video-link-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-        }
-        .thumbnail-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 アスペクト比 */
-            height: 0;
-            background: #000;
-        }
-        .video-thumb {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;
-        }
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 42px;
-            background: rgba(239, 68, 68, 0.9);
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        .video-title {
-            padding: 12px 14px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #374151;
-            margin: 0;
-            text-align: left;
-            line-height: 1.4;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- 固定ヘッダー -->
-    <header class="header">
-        <h1>学習型知覚データ処理研究室</h1>
-    </header>
-
-    <div class="container">
-        <!-- 混雑状況カード -->
-        <div class="box-card card">
-            <h2>走れ！だいごくん<br>リアルタイム状況</h2>
-            <div class="status" id="status">読み込み中...</div>
-            <div class="time" id="waitTime">-- 分待ち</div>
-            <p class="update-time" id="updateTime">最終更新: --:--:--</p>
-        </div>
-
-        <!-- ランキングへのボタン（暖色系ボタン） -->
-        <div class="ranking-button-container">
-            <a href="https://minegentaro-maker.github.io/ranking/" target="_blank" rel="noopener noreferrer" class="ranking-btn">
-                🏆 ランキングはこちら
-            </a>
-        </div>
-
-        <!-- フッターバナー（YouTubeサムネイル） -->
-        <div class="box-card footer-banner">
-            <h3>研究室紹介動画</h3>
-            <a href="https://www.youtube.com/watch?v=VKgWIIfOIyE&t=4s" target="_blank" rel="noopener noreferrer" class="video-link-card">
-                <div class="thumbnail-container">
-                    <img src="https://img.youtube.com/vi/VKgWIIfOIyE/hqdefault.jpg" alt="研究室紹介動画" class="video-thumb">
-                    <div class="play-button">▶</div>
-                </div>
-                <p class="video-title">理工学部 学習型知覚データ処理研究室 村松大吾教授</p>
-            </a>
-        </div>
-    </div>
-
-    <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbzu20lq0pPKWAH6WfpWC0TetELGPG9YIzs7olrJEBTyKaKc89QEhEMbohl37TLeaApT/exec";
-
-        function fetchData() {
-            fetch(GAS_URL)
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('status').innerText = data.status;
-                    document.getElementById('waitTime').innerText = data.waitTime + " 分待ち";
-                    document.getElementById('updateTime').innerText = "最終更新: " + data.updatedAt;
-                })
-                .catch(error => console.error('エラー:', error));
-        }
-
-        // 初回取得と5秒ごとの定期更新
-        fetchData();
-        setInterval(fetchData, 5000);
-    </script>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="ja">
-<head></head>
-<body>
+<head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>走れ！だいごくん 混雑状況</title>
@@ -485,8 +244,8 @@
         }
         /* ===== 追加ここまで ===== */
     </style>
-
-
+</head>
+<body>
 
     <!-- ===== 追加：読み込み画面 ===== -->
     <div id="loading" role="status" aria-label="読み込み中">
@@ -524,7 +283,7 @@
         <!-- フッターバナー（YouTubeサムネイル） -->
         <div class="box-card footer-banner">
             <h3>研究室紹介動画</h3>
-            <a href="https://www.youtube.com/watch?v=VKgWIIfOIyE&amp;t=4s" target="_blank" rel="noopener noreferrer" class="video-link-card">
+            <a href="https://www.youtube.com/watch?v=VKgWIIfOIyE&t=4s" target="_blank" rel="noopener noreferrer" class="video-link-card">
                 <div class="thumbnail-container">
                     <img src="https://img.youtube.com/vi/VKgWIIfOIyE/hqdefault.jpg" alt="研究室紹介動画" class="video-thumb">
                     <div class="play-button">▶</div>
@@ -576,7 +335,5 @@
         showLoadingThen(fetchData());
         setInterval(fetchData, 5000);
     </script>
-
-
-index.html を表示しています。
-</body></html>
+</body>
+</html>
