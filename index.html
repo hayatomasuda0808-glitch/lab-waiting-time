@@ -3,65 +3,133 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>研究室展示 混雑状況</title>
+    <title>走れ！だいごくん 混雑状況</title>
     <style>
         body { 
-            font-family: sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
             text-align: center; 
-            padding: 40px; 
             background: #f4f4f9; 
             margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
         }
-        .card { 
-            background: white; 
-            padding: 30px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-            display: inline-block; 
-            margin-bottom: 20px;
-        }
-        .time { font-size: 48px; font-weight: bold; color: #2563eb; margin: 20px 0; }
-        .status { font-size: 20px; color: #333; }
-        
-        .ranking-link { margin-bottom: 30px; }
-        .ranking-link a { color: #2563eb; text-decoration: none; font-weight: bold; }
-        .ranking-link a:hover { text-decoration: underline; }
 
-        /* フッターバナー（サムネイルカード）のスタイル */
-        .footer-banner {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            max-width: 560px;
+        /* ヘッダーのスタイル */
+        .header {
+            width: 100%;
+            background: #1e3a8a; /* 深みのあるブルー */
+            color: white;
+            padding: 16px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 24px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* メインコンテンツエリア（幅を統一するため共通コンテナで管理） */
+        .container {
+            width: 100%;
+            max-width: 480px; /* すべてのボックスの基準幅 */
+            padding: 0 16px 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* ボックス間の余白を統一 */
+        }
+
+        /* 共通のボックススタイル（幅とデザインの統一） */
+        .box-card {
+            background: white; 
+            padding: 24px; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
             width: 100%;
             box-sizing: border-box;
-            margin-top: auto;
         }
+
+        /* 混雑状況カード */
+        .card h2 {
+            margin: 0 0 12px;
+            font-size: 22px;
+            color: #1f2937;
+            line-height: 1.3;
+        }
+        .status { 
+            font-size: 18px; 
+            color: #4b5563; 
+            font-weight: 500;
+        }
+        .time { 
+            font-size: 44px; 
+            font-weight: 700; 
+            color: #2563eb; 
+            margin: 14px 0; 
+        }
+        .update-time {
+            color: #6b7280;
+            font-size: 13px;
+            margin: 0;
+        }
+        
+        /* ランキングへのリンク（暖色系ボックス） */
+        .ranking-box {
+            background: linear-gradient(135deg, #fff5ed 0%, #ffe4d6 100%);
+            border: 1px solid #ffd8c2;
+            padding: 18px 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            width: 100%;
+            box-sizing: border-box;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .ranking-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        }
+        .ranking-link a { 
+            color: #c2410c; /* 深みのある暖色オレンジ系 */
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .ranking-link a:hover { 
+            text-decoration: underline; 
+        }
+
+        /* フッターバナー（YouTubeサムネイル） */
         .footer-banner h3 {
             margin-top: 0;
             font-size: 16px;
-            color: #333;
-            margin-bottom: 15px;
+            color: #1f2937;
+            margin-bottom: 14px;
+            text-align: left;
         }
         .video-link-card {
             display: block;
             text-decoration: none;
             color: #333;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             background: #fff;
-            border: 1px solid #ddd;
+            border: 1px solid #e5e7eb;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .video-link-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
         }
         .thumbnail-container {
             position: relative;
@@ -84,51 +152,61 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 68px;
-            height: 48px;
-            background: rgba(255, 0, 0, 0.85);
+            width: 60px;
+            height: 42px;
+            background: rgba(239, 68, 68, 0.9);
             color: white;
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         .video-title {
-            padding: 12px;
+            padding: 12px 14px;
             font-size: 14px;
-            font-weight: bold;
-            color: #333;
+            font-weight: 600;
+            color: #374151;
             margin: 0;
             text-align: left;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2 style="width: 234px;">学習型知覚データ処理研究室<br>待ち時間</h2>
-        <div class="status" id="status">読み込み中...</div>
-        <div class="time" id="waitTime">-- 分待ち</div>
-        <p><small id="updateTime">最終更新: --:--:--</small></p>
-    </div>
 
-    <!-- ランキングへのリンク -->
-    <div class="ranking-link">
-        <a href="https://minegentaro-maker.github.io/ranking/" target="_blank" rel="noopener noreferrer">ランキングはこちら</a>
-    </div>
+    <!-- ヘッダー -->
+    <header class="header">
+        <h1>学習型知覚データ処理研究室</h1>
+    </header>
 
-    <!-- フッターバナー（高画質サムネイル＋リンク形式） -->
-    <footer class="footer-banner">
-        <h3>研究室紹介動画</h3>
-        <a href="https://www.youtube.com/watch?v=VKgWIIfOIyE&t=4s" target="_blank" rel="noopener noreferrer" class="video-link-card">
-            <div class="thumbnail-container">
-                <img src="https://img.youtube.com/vi/VKgWIIfOIyE/hqdefault.jpg" alt="研究室紹介動画" class="video-thumb">
-                <div class="play-button">▶</div>
-            </div>
-            <p class="video-title">理工学部 学習型知覚データ処理研究室 村松大吾教授</p>
-        </a>
-    </footer>
+    <div class="container">
+        <!-- 混雑状況カード -->
+        <div class="box-card card">
+            <h2>走れ！だいごくん<br>リアルタイム状況</h2>
+            <div class="status" id="status">読み込み中...</div>
+            <div class="time" id="waitTime">-- 分待ち</div>
+            <p class="update-time" id="updateTime">最終更新: --:--:--</p>
+        </div>
+
+        <!-- ランキングへのリンク（暖色系ボックス） -->
+        <div class="ranking-box ranking-link">
+            <a href="https://minegentaro-maker.github.io/ranking/" target="_blank" rel="noopener noreferrer">🏆 ランキングはこちら</a>
+        </div>
+
+        <!-- フッターバナー（YouTubeサムネイル） -->
+        <div class="box-card footer-banner">
+            <h3>研究室紹介動画</h3>
+            <a href="https://www.youtube.com/watch?v=VKgWIIfOIyE&t=4s" target="_blank" rel="noopener noreferrer" class="video-link-card">
+                <div class="thumbnail-container">
+                    <img src="https://img.youtube.com/vi/VKgWIIfOIyE/hqdefault.jpg" alt="研究室紹介動画" class="video-thumb">
+                    <div class="play-button">▶</div>
+                </div>
+                <p class="video-title">理工学部 学習型知覚データ処理研究室 村松大吾教授</p>
+            </a>
+        </div>
+    </div>
 
     <script>
         const GAS_URL = "https://script.google.com/macros/s/AKfycbzu20lq0pPKWAH6WfpWC0TetELGPG9YIzs7olrJEBTyKaKc89QEhEMbohl37TLeaApT/exec";
