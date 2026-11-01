@@ -37,16 +37,16 @@
         /* メインコンテンツエリア（幅を統一するため共通コンテナで管理） */
         .container {
             width: 100%;
-            max-width: 480px; /* すべてのボックスの基準幅 */
+            max-width: 480px; /* すべてのコンテンツの基準幅 */
             padding: 0 16px 40px;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px; /* ボックス間の余白を統一 */
+            gap: 20px; /* 要素間の余白を統一 */
         }
 
-        /* 共通のボックススタイル（幅とデザインの統一） */
+        /* 共通のカードスタイル */
         .box-card {
             background: white; 
             padding: 24px; 
@@ -80,33 +80,35 @@
             margin: 0;
         }
         
-        /* ランキングへのリンク（暖色系ボックス） */
-        .ranking-box {
-            background: linear-gradient(135deg, #fff5ed 0%, #ffe4d6 100%);
-            border: 1px solid #ffd8c2;
-            padding: 18px 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        /* ランキングボタン（暖色系・幅統一） */
+        .ranking-button-container {
             width: 100%;
-            box-sizing: border-box;
-            transition: transform 0.2s, box-shadow 0.2s;
         }
-        .ranking-box:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-        }
-        .ranking-link a { 
-            color: #c2410c; /* 深みのある暖色オレンジ系 */
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 18px;
+        .ranking-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); /* 鮮やかなオレンジグラデーション */
+            color: white;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+            box-sizing: border-box;
+            transition: all 0.2s ease;
         }
-        .ranking-link a:hover { 
-            text-decoration: underline; 
+        .ranking-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(234, 88, 12, 0.45);
+            background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+        }
+        .ranking-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
         }
 
         /* フッターバナー（YouTubeサムネイル） */
@@ -190,9 +192,11 @@
             <p class="update-time" id="updateTime">最終更新: --:--:--</p>
         </div>
 
-        <!-- ランキングへのリンク（暖色系ボックス） -->
-        <div class="ranking-box ranking-link">
-            <a href="https://minegentaro-maker.github.io/ranking/" target="_blank" rel="noopener noreferrer">🏆 ランキングはこちら</a>
+        <!-- ランキングへのボタン（暖色系ボタン） -->
+        <div class="ranking-button-container">
+            <a href="https://minegentaro-maker.github.io/ranking/" target="_blank" rel="noopener noreferrer" class="ranking-btn">
+                🏆 ランキングはこちら
+            </a>
         </div>
 
         <!-- フッターバナー（YouTubeサムネイル） -->
