@@ -178,6 +178,17 @@
             text-align: left;
             line-height: 1.4;
         }
+        /* Instagram風のグラデーション背景にするスタイル */
+        .instagram-btn {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #ffffff !important; /* 文字色を白に固定 */
+            border: none;
+        }
+        
+        /* ホバー時の微調整（少し透過させるなど） */
+        .instagram-btn:hover {
+            opacity: 0.9;
+        }
 
         /* ===== ここから追加：開いたときの読み込み画面（loading_only.html と同じ見た目） =====
            ページの上に全画面で重ね（固定ヘッダーより手前＝z-index 2000）、
@@ -289,6 +300,20 @@
                     <div class="play-button">▶</div>
                 </div>
                 <p class="video-title">理工学部 学習型知覚データ処理研究室 村松大吾教授</p>
+            </a>
+        </div>
+        
+        <!-- Instagramボタン -->
+        <div class="ranking-button-container">
+            <a href="https://www.instagram.com/your_account_here" target="_blank" rel="noopener noreferrer" class="ranking-btn instagram-btn">
+                Instagramはこちら
+            </a>
+        </div>
+
+        <!-- 研究室紹介サイトボタン -->
+        <div class="ranking-button-container">
+            <a href="https://example.com/lab-site" target="_blank" rel="noopener noreferrer" class="ranking-btn">
+                研究室紹介サイトはこちら
             </a>
         </div>
     </div>
